@@ -1,0 +1,26 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.launcher-bg{
+background-color:white;
+width: 400px;
+height: 100vh;
+}
+.cancel-launcher{
+    color: red;
+    font-size: 20px;
+   background-color: black;
+   padding: 0px 10px;
+}
+.launcher-heading{
+    margin-top: 50px;
+    margin-left: 20px;
+}
+.launcher-item{
+    list-style: none;
+    padding-bottom: 30px;
+    font-size: 20px;
+    color: black;
+ text-align: justify;
+}
