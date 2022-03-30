@@ -11,7 +11,7 @@ export default function Navbar(props) {
     <>
       <div
         className="container-fluid"
-        style={{ backgroundColor: "DodgerBlue", width: "100%", height: "50px" }}
+        style={{ backgroundColor: "DodgerBlue", width: "100%", height: "40px" }}
       >
         <div className="row">
           <div className="col-md-1">

@@ -1,0 +1,22 @@
+.sidebar-bg{
+    background-color: rgb(235, 231, 231);
+    width: 300px;
+    height: 100vh;
+}
+ul li{
+    list-style: none;
+    color: black;
+    text-decoration: none;
+    padding-bottom: 20px;
+    
+}
+ul li a{
+    color: black;
+    text-decoration: none;
+    padding: 10px 35px;
+    
+} 
+a:hover{
+    background-color: white;
+    color: black;
+}
