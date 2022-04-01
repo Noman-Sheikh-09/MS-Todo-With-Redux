@@ -1,13 +1,19 @@
 import React from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useState } from "react";
-import './MyDay.css'
+import { addTask, deleteTask } from "../../store/actions/TaskAction";
+import { useSelector, useDispatch } from "react-redux";
+import "./MyDay.css";
 export default function MyDay() {
   const [showSidebar, setShowSidebar] = useState(false);
   const day = new Date().getDay();
   const month = new Date().getMonth().toString();
   const date = new Date().getDate().toString();
+  const [addTaskOpen, setAddTaskOpen] = useState("");
+  const taskList = useSelector((state) => state.AddReducer.data);
+  const dispatch = useDispatch();
 
+  // console.log(addTask);
   return (
     <>
       <i
@@ -30,11 +36,44 @@ export default function MyDay() {
               {day} - {date} - {month}
             </p>
             <div className="list">
-              
-              <input type="text" placeholder="Add Task"  className="add-place"/>
-              <button className="add-btn"> Add </button>
+              <input
+                type="text"
+                placeholder="Add Task"
+                className="add-place"
+                value={addTaskOpen}
+                onChange={(e) => setAddTaskOpen(e.target.value)}
+              />
+              <button
+                className="add-btn"
+                onClick={() =>
+                  dispatch(addTask(addTaskOpen), setAddTaskOpen(""))
+                }
+              > 
+                Add
+              </button>
             </div>
-            
+            {/* This will be a components  */}
+
+            {
+            taskList.map((elem) => {
+              return (
+                <div className="list" key={elem.id} >
+                  <p  className="add-place">
+                    {elem.data}
+                  </p>
+                  <button
+                    className="add-btn"
+                    style={{
+                      backgroundColor: "green",
+                      border: "1px solid green",
+                    }}
+                    onClick={() => dispatch(deleteTask(elem.id))}
+                  > 
+                    X
+                  </button>
+                </div>
+              );
+            })}
           </div>
           <div className="col-md-3"></div>
         </div>
