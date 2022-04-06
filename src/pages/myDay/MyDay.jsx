@@ -1,9 +1,12 @@
 import React from "react";
-import Sidebar from "../../components/sidebar/Sidebar";
+// import Sidebar from "../../components/sidebar/Sidebar";
+import "./MyDay.css";
 import { useState } from "react";
+import Sidebar from "../../components/sidebar/Sidebar";
 import { addTask, deleteTask } from "../../store/actions/TaskAction";
 import { useSelector, useDispatch } from "react-redux";
-import "./MyDay.css";
+import RightSidebar from "../../components/rightSidebar/RightSidebar";
+
 export default function MyDay() {
   const [showSidebar, setShowSidebar] = useState(false);
   const day = new Date().getDay();
@@ -12,10 +15,9 @@ export default function MyDay() {
   const [addTaskOpen, setAddTaskOpen] = useState("");
   const taskList = useSelector((state) => state.AddReducer.data);
   const dispatch = useDispatch();
-
   // console.log(addTask);
   return (
-    <>
+    <div>
       <i
         className="fa-solid fa-grip-lines"
         style={{
@@ -25,16 +27,18 @@ export default function MyDay() {
         }}
         onClick={() => setShowSidebar(true)}
       ></i>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-3">
-            {showSidebar && <Sidebar closeSidebar={setShowSidebar} />}
-          </div>
-          <div className="col-md-6">
-            <h4>My Day ...</h4>
+     <div className="container-fluid">
+
+       <div className="row">
+         <div className="col-md-3">
+         {showSidebar && <Sidebar closeSidebar={setShowSidebar} />}
+         </div>
+         <div className="col-md-6">
+<h4>My Day ...</h4>
             <p>
               {day} - {date} - {month}
             </p>
+
             <div className="list">
               <input
                 type="text"
@@ -43,42 +47,37 @@ export default function MyDay() {
                 value={addTaskOpen}
                 onChange={(e) => setAddTaskOpen(e.target.value)}
               />
+              <i
+                className="fa-regular fa-calendar-days"
+                style={{ marginLeft: "40px", color: "gray", cursor: "pointer" }}
+              ></i>
+              <i
+                className="fa-regular fa-bell"
+                style={{ marginLeft: "15px", color: "gray", cursor: "pointer" }}
+              ></i>
+            
               <button
                 className="add-btn"
                 onClick={() =>
                   dispatch(addTask(addTaskOpen), setAddTaskOpen(""))
                 }
-              > 
+              >
                 Add
               </button>
-            </div>
-            {/* This will be a components  */}
-
-            {
-            taskList.map((elem) => {
-              return (
-                <div className="list" key={elem.id} >
-                  <p  className="add-place">
-                    {elem.data}
-                  </p>
-                  <button
-                    className="add-btn"
-                    style={{
-                      backgroundColor: "green",
-                      border: "1px solid green",
-                    }}
-                    onClick={() => dispatch(deleteTask(elem.id))}
-                  > 
-                    X
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-          <div className="col-md-3"></div>
-        </div>
-      </div>
-      {/* {showSidebar && <Sidebar closeSidebar={setShowSidebar} />} */}
-    </>
+              </div>
+         </div>
+<div className="col-md-3">
+ {/* <RightSidebar/> */}
+</div>
+       </div>
+     </div>
+           
+          
+    </div>
   );
 }
+
+
+
+
+

@@ -1,7 +1,10 @@
 import React from 'react'
+import MyDay from '../myDay/MyDay'
 
 export default function Important() {
   return (
-    <div>Important</div>
+    <div>
+      <MyDay/>
+    </div>
   )
 }

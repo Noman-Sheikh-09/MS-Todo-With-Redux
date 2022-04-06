@@ -1,4 +1,4 @@
-export const initialState ={
+const initialState = {
     data :[]
 }
 
@@ -8,8 +8,8 @@ switch(action.type){
         const {id , data } = action.payload;
         return {
             ...state,
-            data:[
-                ...state,data,
+            list:[
+                ...state,action.payload,
                 {
                     id:id,
                     data:data,

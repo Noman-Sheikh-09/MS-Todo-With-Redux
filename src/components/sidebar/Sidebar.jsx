@@ -1,5 +1,6 @@
 import React from "react";
 import "./Sidebar.css";
+import {Link} from 'react-router-dom'
 export default function Sidebar({ closeSidebar }) {
   return (
     <>
@@ -13,21 +14,21 @@ export default function Sidebar({ closeSidebar }) {
           }}
           onClick={() => closeSidebar(false)}
         ></i>
-        <ul>
+        <ul> 
           <li>
-            <a href="#">My Day</a>
+            <Link to="/">My Day</Link>
           </li>
           <li>
-            <a href="#">Improtant</a>
+            <Link to="/important">Improtant</Link>
           </li>
           <li>
-            <a href="#">Planning</a>
+            <Link to="/planning">Planning</Link>
           </li>
           <li>
-            <a href="#">Assigned to me</a>
+            <Link to="assigned_to_me">Assigned to me</Link>
           </li>
           <li>
-            <a href="#">Tasks</a>
+            <Link to="task">Tasks</Link>
           </li>
         </ul>
       </div>

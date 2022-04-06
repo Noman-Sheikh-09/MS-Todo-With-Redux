@@ -3,8 +3,8 @@ export const addTask = (data) => {
   return {
     type: "ADD_TASK",
     payload: {
-        id : new Date().getDate.toString(),
-        data: 'data' ,
+        id : new Date().getTime().toString(),
+        data:data 
     }
   };
 };
