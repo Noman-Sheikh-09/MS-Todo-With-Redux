@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./RightSidebar.css";
-export default function RightSidebar({ addTaskOpen }) {
+export default function RightSidebar({ addTaskOpen, closeRightBar }) {
   return (
     <>
     <div className="box-two" >

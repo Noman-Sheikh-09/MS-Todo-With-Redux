@@ -1,25 +1,50 @@
-const ADD_TASK ="ADD_TASK";
 
- const initialState = {
-    list  :[]
-}
+const initialState = {
+  list: [],
+};
 
-export const AddReducer=(state=initialState, action)=>{
-switch(action.type){
-    case ADD_TASK:
-        const {id , data } = action.payload;
-        return {
+export const AddReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "ADD_TASK":
+      const { id, data } = action.payload;
+      return {
+        ...state,
+        list: [
+          ...state.list,
+          action.payload,
+          
+        ],
+        
+      };
+      
+        case "DELETE_TASK":
+          const listAfterDelete = state.list.filter((value)=> value.id !== action.id  )
+            return {
+                ...state,
+                list: listAfterDelete,
+               
+            }
+
+
+            case "UPDATE_TASK":{
+          const listAfterUpdate = state.list.map((value,index)=> {
+
+           if ( value.id === action.payload.id) {
+             return action.payload
+           } 
+          else{
+            return  value
+          }} )
+          return {
             ...state,
-            list:[
-                ...state.list ,action.payload,
-                // {
-                //     id:id,
-                //     data:data,
-                // }
-            ]
-           
+            list: listAfterUpdate
+          };
         }
-        default: return state
-}
-
-}
+           
+            
+            default:
+                return state
+        };
+  
+  
+};

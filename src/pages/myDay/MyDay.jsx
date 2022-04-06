@@ -1,20 +1,29 @@
 import React from "react";
 // import Sidebar from "../../components/sidebar/Sidebar";
 import "./MyDay.css";
+import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
-import { addTask, deleteTask } from "../../store/actions/TaskAction";
+import {
+  addTask,
+  deleteTask,
+  updateTask,
+} from "../../store/actions/TaskAction";
 import { useSelector, useDispatch } from "react-redux";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 export default function MyDay() {
-  const [showSidebar, setShowSidebar] = useState(false);
-  const day = new Date().getDay();
+  const [showSidebar, setShowSidebar] = useState(true);
+  const day = new Date().getDay().toString();
   const month = new Date().getMonth().toString();
-  const date = new Date().getDate().toString();
+  const date = new Date().getFullYear().toString();
+
   const [addTaskOpen, setAddTaskOpen] = useState("");
   const taskList = useSelector((state) => state.AddReducer.list);
   const dispatch = useDispatch();
+  const [showRightBar, setShowRightBar] = useState(false);
+
   // console.log(addTask);
   return (
     <div>
@@ -27,15 +36,14 @@ export default function MyDay() {
         }}
         onClick={() => setShowSidebar(true)}
       ></i>
-     <div className="container-fluid">
-
-       <div className="row">
-         <div className="col-md-3">
-         {showSidebar && <Sidebar closeSidebar={setShowSidebar} />}
-         </div>
-         <div className="col-md-6">
-<h4>My Day ...</h4>
-            <p>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-3">
+            {showSidebar && <Sidebar closeSidebar={setShowSidebar} />}
+          </div>
+          <div className="col-md-6">
+            <h4>My Day ...</h4>
+            <p style={{ color: "gray", fontSize: "12px" }}>
               {day} - {date} - {month}
             </p>
 
@@ -54,8 +62,9 @@ export default function MyDay() {
               <i
                 className="fa-regular fa-bell"
                 style={{ marginLeft: "15px", color: "gray", cursor: "pointer" }}
+                onClick={() => setShowRightBar(true)}
               ></i>
-            
+
               <button
                 className="add-btn"
                 onClick={() =>
@@ -64,44 +73,52 @@ export default function MyDay() {
               >
                 Add
               </button>
-              </div>
-            
-              {
-                taskList.map((value,id )=>{
-                  return (
-                    <div className="list" key={id}>
-                    <p  className="add-place">
-                     
-                     {value.data}
-                     
-                      </p>
-                     <button
-                className="add-btn"
-                onClick={() =>
-                  dispatch(deleteTask(value.id))
-                }
-              >
-               Del 
-              </button>
-              <hr />
-                    </div>
-                  )
-                 
-                })
-              }
-         </div>
-<div className="col-md-3">
- {/* <RightSidebar/> */}
-</div>
-       </div>
-     </div>
-           
-          
+            </div>
+
+            {taskList.map((value, id) => {
+              return (
+                <div
+                  className="list"
+                  onClick={() => setShowRightBar(true)}
+                  key={id}
+                >
+                  <p className="add-place">{value.data}</p>
+                  <i
+                    className="fa-solid fa-star"
+                    style={{
+                      textAlign: "center",
+                      color: "dodgerblue",
+                      marginLeft: "10px",
+                      cursor: "pointer",
+                    }}
+                  ></i>
+                  <button
+                    className="add-btn"
+                    onClick={() => dispatch(deleteTask(value.id))}
+                  >
+                    Del
+                  </button>
+                  <button
+                    style={{
+                      backgroundColor: "green",
+                      marginLeft: "10px",
+                      padding: "0px 10px",
+                      border: "1px solid green",
+                      color: "white",
+                    }}
+                    onClick={() => dispatch(updateTask(value.id))}
+                  >
+                    Edit
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+          <div className="col-md-3">
+            {showRightBar && <RightSidebar closeRightBar={setShowRightBar} />}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
-
-
-
-
-

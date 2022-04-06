@@ -6,7 +6,7 @@ import Assigned from "./pages/assigned/Assigned";
 import Tasks from './pages/tasks/Tasks'
 import Planning from "./pages/planning/Planning";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Sidebar from "./components/sidebar/Sidebar";
+
 function App() {
   return (
     <div className="App">
