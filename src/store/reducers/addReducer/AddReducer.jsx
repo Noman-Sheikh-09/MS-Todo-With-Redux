@@ -1,20 +1,21 @@
-const initialState = {
-    data :[]
+const ADD_TASK ="ADD_TASK";
+
+ const initialState = {
+    list  :[]
 }
 
 export const AddReducer=(state=initialState, action)=>{
 switch(action.type){
-    case 'ADD_TASK':
+    case ADD_TASK:
         const {id , data } = action.payload;
         return {
             ...state,
             list:[
-                ...state,action.payload,
-                {
-                    id:id,
-                    data:data,
-                }
-
+                ...state.list ,action.payload,
+                // {
+                //     id:id,
+                //     data:data,
+                // }
             ]
            
         }

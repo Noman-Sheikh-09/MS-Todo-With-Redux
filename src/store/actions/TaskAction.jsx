@@ -12,6 +12,7 @@ export const addTask = (data) => {
 export const deleteTask = () => {
   return {
     type: "DELETE_TASK",
+    
   };
 };
 

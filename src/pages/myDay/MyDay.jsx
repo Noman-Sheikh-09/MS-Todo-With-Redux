@@ -13,7 +13,7 @@ export default function MyDay() {
   const month = new Date().getMonth().toString();
   const date = new Date().getDate().toString();
   const [addTaskOpen, setAddTaskOpen] = useState("");
-  const taskList = useSelector((state) => state.AddReducer.data);
+  const taskList = useSelector((state) => state.AddReducer.list);
   const dispatch = useDispatch();
   // console.log(addTask);
   return (
@@ -65,6 +65,30 @@ export default function MyDay() {
                 Add
               </button>
               </div>
+            
+              {
+                taskList.map((value,id )=>{
+                  return (
+                    <div className="list" key={id}>
+                    <p  className="add-place">
+                     
+                     {value.data}
+                     
+                      </p>
+                     <button
+                className="add-btn"
+                onClick={() =>
+                  dispatch(deleteTask(value.id))
+                }
+              >
+               Del 
+              </button>
+              <hr />
+                    </div>
+                  )
+                 
+                })
+              }
          </div>
 <div className="col-md-3">
  {/* <RightSidebar/> */}

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default function Task() {
+export default function Task({addTaskOpen}) {
     
    
   return (
@@ -9,7 +9,7 @@ export default function Task() {
      <table>
        <tr>
          <td>
-
+{addTaskOpen}
          </td>
          <td>
            
