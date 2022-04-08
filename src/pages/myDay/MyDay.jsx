@@ -1,7 +1,7 @@
 import React from "react";
+import { v4 as uuidv4 } from 'uuid';
 // import Sidebar from "../../components/sidebar/Sidebar";
 import "./MyDay.css";
-import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import {
@@ -11,7 +11,6 @@ import {
 } from "../../store/actions/TaskAction";
 import { useSelector, useDispatch } from "react-redux";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 export default function MyDay() {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -20,13 +19,28 @@ export default function MyDay() {
   const date = new Date().getFullYear().toString();
 
   const [addTaskOpen, setAddTaskOpen] = useState("");
+  const [isEdit, setIsEdit] = useState(false)
   const taskList = useSelector((state) => state.AddReducer.list);
   const dispatch = useDispatch();
   const [showRightBar, setShowRightBar] = useState(false);
 
+
   // console.log(addTask);
+const onEditHandler=(value,id)=>{
+  setAddTaskOpen(value)
+  setIsEdit(true)
+}
+const ctaEdit = ()=>{
+  let task ={}
+ 
+  dispatch(updateTask(task))
+  setAddTaskOpen('')
+  setIsEdit(false)
+}
+
+   
   return (
-    <div>
+    <>
       <i
         className="fa-solid fa-grip-lines"
         style={{
@@ -78,22 +92,32 @@ export default function MyDay() {
             {taskList.map((value, id) => {
               return (
                 <div
+                onClick={()=>setShowRightBar(true)}
                   className="list"
-                  onClick={() => setShowRightBar(true)}
+                  
                   key={id}
                 >
-                  <p className="add-place">{value.data}</p>
+                  <p className="add-place" >{value.data}</p>
+
                   <i
                     className="fa-solid fa-star"
                     style={{
                       textAlign: "center",
                       color: "dodgerblue",
-                      marginLeft: "10px",
+                      marginLeft: "30px",
                       cursor: "pointer",
+                      
                     }}
                   ></i>
+
                   <button
-                    className="add-btn"
+                    style={{
+                      backgroundColor: "tomato",
+                      border: "1px solid tomato",
+                      padding: "0px 10px",
+                      marginLeft: "350px",
+                      marginTop: "1px",
+                    }}
                     onClick={() => dispatch(deleteTask(value.id))}
                   >
                     Del
@@ -106,7 +130,7 @@ export default function MyDay() {
                       border: "1px solid green",
                       color: "white",
                     }}
-                    onClick={() => dispatch(updateTask(value.id))}
+                    onClick={ctaEdit}
                   >
                     Edit
                   </button>
@@ -119,6 +143,6 @@ export default function MyDay() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

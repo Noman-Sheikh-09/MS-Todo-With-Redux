@@ -3,7 +3,7 @@ export const addTask = (data) => {
   return {
     type: "ADD_TASK",
     payload: {
-        id :uuidv4(),
+        id :uuidv4(), 
         data:data 
     }
   };

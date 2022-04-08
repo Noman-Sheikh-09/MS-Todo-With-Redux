@@ -2,11 +2,14 @@ import React from "react";
 import { useState } from "react";
 import Launch from "../launch/Launch";
 import Profile from "../profile/Profile";
+import { Link } from "react-router-dom";
+
 
 export default function Navbar(props) {
   const [openLauncher, setOpenLauncher] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
-  
+
+
   return (
     <>
       <div
@@ -28,8 +31,18 @@ export default function Navbar(props) {
               onClick={() => setOpenLauncher(true)}
             ></i>
           </div>
-
-          <div className="col-md-2"></div>
+          <div className="col-md-2">
+            <a
+              href="#"
+              style={{
+                textDecoration: "none",
+                color: "white",
+                marginTop: "10px",
+              }}
+            >
+              <h6 style={{ marginTop: "10px", marginLeft: "0px" }}>To Do</h6>
+            </a>
+          </div>
           <div className="col-md-4">
             <input
               type="text"
@@ -74,15 +87,18 @@ export default function Navbar(props) {
                 marginLeft: "30px",
                 cursor: "pointer",
               }}
-              // Help
-            
-            ></i>
-          </div>
          
+              // Help
+             
+            ></i>
+            
+          </div>
+
           <div className="col-md-1"></div>
           <div className="col-md-2">
+          
             <i
-              className="fa-solid fa-person"
+              className="fa-brands fa-app-store"
               style={{
                 marginTop: "10px",
                 color: "white",

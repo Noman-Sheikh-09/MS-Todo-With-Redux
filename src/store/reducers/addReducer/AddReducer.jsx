@@ -27,7 +27,7 @@ export const AddReducer = (state = initialState, action) => {
 
 
             case "UPDATE_TASK":{
-          const listAfterUpdate = state.list.map((value,index)=> {
+          const listAfterUpdate = state.list.map((value,id)=> {
 
            if ( value.id === action.payload.id) {
              return action.payload

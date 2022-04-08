@@ -8,27 +8,27 @@ export default function Sidebar({ closeSidebar }) {
         <i
           className="fa-solid fa-grip-lines"
           style={{
-            fontSize: "30px",
+            fontSize: "30px", 
             marginLeft: "20px",
             color: "black",
           }}
           onClick={() => closeSidebar(false)}
         ></i>
         <ul> 
-          <li>
-            <Link to="/">My Day</Link>
+          <li> 
+            <Link to="/"><i class="fa-solid fa-sun" ></i>My Day</Link>
           </li>
           <li>
-            <Link to="/important">Improtant</Link>
+            <Link to="/important"><i className="fa-solid fa-star" ></i>Improtant</Link>
           </li>
           <li>
-            <Link to="/planning">Planning</Link>
+            <Link to="/planning"><i className="fa-solid fa-calendar-days"></i>Planning</Link>
           </li>
           <li>
-            <Link to="assigned_to_me">Assigned to me</Link>
+            <Link to="assigned_to_me"><i className="fa-solid fa-user-large"></i>Assigned to me</Link>
           </li>
           <li>
-            <Link to="task">Tasks</Link>
+            <Link to="task"><i className="fa-solid fa-house"></i>Tasks</Link>
           </li>
         </ul>
       </div>
