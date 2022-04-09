@@ -1,5 +1,5 @@
 import React from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 // import Sidebar from "../../components/sidebar/Sidebar";
 import "./MyDay.css";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import {
   addTask,
   deleteTask,
   updateTask,
+  fvrtTask,
 } from "../../store/actions/TaskAction";
 import { useSelector, useDispatch } from "react-redux";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
@@ -17,28 +18,56 @@ export default function MyDay() {
   const day = new Date().getDay().toString();
   const month = new Date().getMonth().toString();
   const date = new Date().getFullYear().toString();
-
   const [addTaskOpen, setAddTaskOpen] = useState("");
-  const [isEdit, setIsEdit] = useState(false)
+  const [isEdit, setIsEdit] = useState(false);
   const taskList = useSelector((state) => state.AddReducer.list);
   const dispatch = useDispatch();
   const [showRightBar, setShowRightBar] = useState(false);
-
-
+  const [flag, setFlag] = useState(false);
+  const [id, setId] = useState("");
+  const [fvrt, setFvrt] = useState(false);
   // console.log(addTask);
-const onEditHandler=(value,id)=>{
-  setAddTaskOpen(value)
-  setIsEdit(true)
-}
-const ctaEdit = ()=>{
-  let task ={}
- 
-  dispatch(updateTask(task))
-  setAddTaskOpen('')
-  setIsEdit(false)
-}
+  // const onEditHandler = (value, id) => {
+  //   setAddTaskOpen(value);
+  //   setIsEdit(true);
+  // };
+  const ctaEditHandler = (value) => {
+    // let task ={}
+    setFlag(true);
+    setAddTaskOpen(value.task);
+    setId(value.id);
+    setFvrt(value.fvrt);
+    // dispatch(updateTask(task))
+    // setIsEdit(false)
+  };
+  const updateHandler = () => {
+    const data = {
+      task: addTaskOpen,
+      id: id,
+      fvrt: fvrt,
+    };
+    dispatch(updateTask(data, id));
+    setAddTaskOpen("");
+    setFlag(false);
+  };
 
-   
+  const submitHandler = () => {
+    const data = {
+      task: addTaskOpen,
+      id: uuidv4(),
+      fvrt: false,
+    };
+    dispatch(addTask(data));
+    setAddTaskOpen("");
+  };
+  const fvrtHandler = (value) => {
+    const data = {
+      task: value.task,
+      id: value.id,
+      fvrt: !value.fvrt,
+    };
+    dispatch(fvrtTask(data, value.id));
+  };
   return (
     <>
       <i
@@ -52,15 +81,15 @@ const ctaEdit = ()=>{
       ></i>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-3">
+          <div className={showSidebar ? "col-md-3" : "block"}>
             {showSidebar && <Sidebar closeSidebar={setShowSidebar} />}
           </div>
-          <div className="col-md-6">
+          {/* className={(!showSidebar)?"col-md-9":"col-md-12"} */}
+          <div className={!showRightBar ? "col-md-9" : "col-md-6"}>
             <h4>My Day ...</h4>
             <p style={{ color: "gray", fontSize: "12px" }}>
               {day} - {date} - {month}
             </p>
-
             <div className="list">
               <input
                 type="text"
@@ -78,37 +107,49 @@ const ctaEdit = ()=>{
                 style={{ marginLeft: "15px", color: "gray", cursor: "pointer" }}
                 onClick={() => setShowRightBar(true)}
               ></i>
-
-              <button
-                className="add-btn"
-                onClick={() =>
-                  dispatch(addTask(addTaskOpen), setAddTaskOpen(""))
-                }
-              >
-                Add
-              </button>
+              {!flag ? (
+                <button className="add-btn" onClick={submitHandler}>
+                  Add
+                </button>
+              ) : (
+                <button className="add-btn" onClick={updateHandler}>
+                  Update
+                </button>
+              )}
             </div>
 
             {taskList.map((value, id) => {
               return (
                 <div
-                onClick={()=>setShowRightBar(true)}
-                  className="list"
                   
+                  className="list"
                   key={id}
                 >
-                  <p className="add-place" >{value.data}</p>
-
-                  <i
-                    className="fa-solid fa-star"
-                    style={{
-                      textAlign: "center",
-                      color: "dodgerblue",
-                      marginLeft: "30px",
-                      cursor: "pointer",
-                      
-                    }}
-                  ></i>
+                  <p className="add-place"
+                  onClick={() => setShowRightBar(true)}>{value.task}</p>
+                  {!value.fvrt ? (
+                    <i
+                      className="fa-solid fa-star"
+                      onClick={() => fvrtHandler(value)}
+                      style={{
+                        textAlign: "center",
+                        color: "dodgerblue",
+                        marginLeft: "30px",
+                        cursor: "pointer",
+                      }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-solid fa-star"
+                      onClick={() => fvrtHandler(value)}
+                      style={{
+                        textAlign: "center",
+                        color: "green",
+                        marginLeft: "30px",
+                        cursor: "pointer",
+                      }}
+                    ></i>
+                  )}
 
                   <button
                     style={{
@@ -130,7 +171,7 @@ const ctaEdit = ()=>{
                       border: "1px solid green",
                       color: "white",
                     }}
-                    onClick={ctaEdit}
+                    onClick={() => ctaEditHandler(value)}
                   >
                     Edit
                   </button>

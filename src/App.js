@@ -10,7 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <Navbar title="To Do" />
+      <Navbar />
    
       <BrowserRouter>
         <Routes>
@@ -18,7 +18,7 @@ function App() {
           <Route path="/important" element={<Important />} />
           <Route path="/planning" element={<Planning />} />
           <Route path="/asigned_to_me" element={<Assigned />} />
-          <Route path="/task" element={<Tasks />} />
+          <Route path="/mytasks" element={<Tasks />} />
         </Routes>
       </BrowserRouter>
     </div>

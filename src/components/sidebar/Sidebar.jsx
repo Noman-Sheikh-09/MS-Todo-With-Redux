@@ -28,7 +28,7 @@ export default function Sidebar({ closeSidebar }) {
             <Link to="assigned_to_me"><i className="fa-solid fa-user-large"></i>Assigned to me</Link>
           </li>
           <li>
-            <Link to="task"><i className="fa-solid fa-house"></i>Tasks</Link>
+            <Link to="mytasks"><i className="fa-solid fa-house"></i>Tasks</Link>
           </li>
         </ul>
       </div>

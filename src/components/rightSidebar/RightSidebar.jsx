@@ -7,7 +7,7 @@ export default function RightSidebar({ addTaskOpen, closeRightBar}) {
     <div className="box-two" >
       {/* onChange Event  */}
     <input type="Radio"  />
-    </div>
+    </div> 
       <div className="box-one">
       
 

@@ -35,8 +35,8 @@ export default function Planning() {
           <div className="col-md-3">
             {showSidebar && <Sidebar closeSidebar={setShowSidebar} />}
           </div>
-          <div className="col-md-6">
-            <h4>Planning ...</h4>
+          <div className={(!showRightBar)?"col-md-9":"col-md-6"}>
+            <h4  style={{color:'dodgerblue'}}>Planning ...</h4>
             <div className="list">
               <input
                 type="text"

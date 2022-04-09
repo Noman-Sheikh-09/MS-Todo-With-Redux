@@ -35,8 +35,8 @@ export default function Important() {
           <div className="col-md-3">
             {showSidebar && <Sidebar closeSidebar={setShowSidebar} />}
           </div>
-          <div className="col-md-6">
-            <h4>Important ...</h4>
+          <div className={(!showRightBar)?"col-md-9":"col-md-6"}>
+            <h4 style={{color:'dodgerblue'}}>Important ...</h4>
             <div className="list">
               <input
                 type="text"
@@ -72,7 +72,7 @@ export default function Important() {
                   onClick={() => setShowRightBar(true)}
                   key={id}
                 >
-                  <p className="add-place">{value.data}</p>
+                  <p className="add-place">{value.task}</p>
 
                   <i
                     className="fa-solid fa-star"

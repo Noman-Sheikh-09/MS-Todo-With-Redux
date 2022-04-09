@@ -6,14 +6,11 @@ const initialState = {
 export const AddReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TASK":
-      const { id, data } = action.payload;
+      // const { id, data } = action.payload;
+      const addTask=[...state.list,action.payload.data]
       return {
         ...state,
-        list: [
-          ...state.list,
-          action.payload,
-          
-        ],
+        list: addTask,
         
       };
       
@@ -27,10 +24,10 @@ export const AddReducer = (state = initialState, action) => {
 
 
             case "UPDATE_TASK":{
-          const listAfterUpdate = state.list.map((value,id)=> {
+          const listAfterUpdate = state.list.map((value)=> {
 
            if ( value.id === action.payload.id) {
-             return action.payload
+             return action.payload.data;
            } 
           else{
             return  value
@@ -40,7 +37,20 @@ export const AddReducer = (state = initialState, action) => {
             list: listAfterUpdate
           };
         }
-           
+        case "FVRT_TASK":{
+          const listAfterUpdate = state.list.map((value)=> {
+
+           if ( value.id === action.payload.id) {
+             return action.payload.data;
+           } 
+          else{
+            return  value
+          }} )
+          return {
+            ...state,
+            list: listAfterUpdate
+          };
+        }
             
             default:
                 return state
