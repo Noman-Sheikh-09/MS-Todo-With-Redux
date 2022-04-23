@@ -6,7 +6,7 @@ const initialState = {
 export const AddReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TASK":
-      // const { id, data } = action.payload;
+      
       const addTask=[...state.list,action.payload.data]
       return {
         ...state,

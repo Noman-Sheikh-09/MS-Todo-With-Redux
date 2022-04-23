@@ -3,7 +3,6 @@ export const addTask = (data) => {
   return {
     type: "ADD_TASK",
     payload: {
-        // id :uuidv4(), 
         data:data ,
     }
   };
@@ -21,7 +20,7 @@ export const deleteTask = (id) => {
 export const updateTask = (data,id) => {
   return {
     type: "UPDATE_TASK",
-   payload:{data:data,id:id},
+   payload:{data:data,id:id}, 
     
  
   };
